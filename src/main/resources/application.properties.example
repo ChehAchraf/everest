@@ -1,1 +1,10 @@
 spring.application.name=everest
+spring.data.mongodb.uri=mongodb://localhost:27017/everest-db
+
+spring.data.mongodb.auto-index-creation=true
+spring.security.user.name= chose any username u want
+spring.security.user.password= also any password
+
+# those are for swagger
+springdoc.api-docs.path=/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
