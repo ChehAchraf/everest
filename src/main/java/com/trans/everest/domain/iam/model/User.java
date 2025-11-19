@@ -19,7 +19,7 @@ import lombok.Setter;
 @Document(collation = "users")
 public class User {
     @Id
-    private Long id;
+    private String id;
 
     private String login;
     private String password;
