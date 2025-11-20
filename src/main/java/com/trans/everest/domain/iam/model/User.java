@@ -16,7 +16,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collation = "users")
+@Document(collection  = "users")
 public class User {
     @Id
     private String id;

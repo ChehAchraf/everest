@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponse registerUser(RegisterUserRequest request) {
-        if(userRepository.findByLogin(request.login())){
+        if(userRepository.existsByLogin(request.login())){
             throw new RuntimeException("this login is already used");
         }
         User user = userMapper.toEntity(request);
