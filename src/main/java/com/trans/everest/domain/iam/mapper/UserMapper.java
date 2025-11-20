@@ -14,6 +14,6 @@ public interface UserMapper {
     @Mapping(target = "active",constant = "true")
     User toEntity(RegisterUserRequest request);
 
-    UserResponse toRequest(User user);
+    UserResponse toResponse(User user);
 
 }
