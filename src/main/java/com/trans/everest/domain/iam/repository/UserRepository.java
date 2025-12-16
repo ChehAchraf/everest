@@ -1,7 +1,10 @@
 package com.trans.everest.domain.iam.repository;
 
 import com.trans.everest.domain.iam.model.RoleType;
+import com.trans.everest.domain.iam.model.SpecialiteType;
 import com.trans.everest.domain.iam.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
@@ -12,5 +15,7 @@ public interface UserRepository extends MongoRepository<User,String> {
 
     boolean existsByLogin(String login);
 
-    List<User> findByRole(RoleType role);
+    Page<User> findByRole(RoleType role, Pageable pageable);
+
+    Page<User> findByRoleAndSpecialite(RoleType role, SpecialiteType specialite, Pageable pageable);
 }

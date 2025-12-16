@@ -42,6 +42,7 @@ public class ColisController {
         return ResponseEntity.ok(colisService.assignColisToTransporter(id, transporterId));
     }
 
+    @GetMapping("/admin/colis")
     public ResponseEntity<Page<Colis>> getAllColis(Pageable pageable) {
         return ResponseEntity.ok(colisService.getAllColis(pageable));
     }
