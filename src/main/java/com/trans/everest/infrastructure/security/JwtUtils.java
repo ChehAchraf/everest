@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtUtils {
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}")
     private String secret;
-    @Value("${jwt.expiration}")
+    @Value("${jwt.expiration:86400000}")
     private Long expiration;
 
     public String generateToken(Authentication authentication){
