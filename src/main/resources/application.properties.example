@@ -8,3 +8,6 @@ spring.security.user.password= also any password
 # those are for swagger
 springdoc.api-docs.path=/api-docs
 springdoc.swagger-ui.path=/swagger-ui.html
+
+jwt.secret=MySuperSecretKeyForMyApp
+jwt.expiration=86400000
