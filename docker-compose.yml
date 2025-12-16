@@ -3,9 +3,21 @@ services:
     image: mongo:latest
     container_name: mongodb_container
     restart: always
-    ports :
+    ports:
       - "27017:27017"
     volumes:
       - ./data/mongo:/data/db
     environment:
       - MONGO_INITDB_DATABASE=everest-db
+
+
+  app:
+    build: .
+    container_name: everest-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/everest-db
+    restart: on-failure

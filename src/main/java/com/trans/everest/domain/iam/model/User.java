@@ -1,5 +1,6 @@
 package com.trans.everest.domain.iam.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,6 +23,7 @@ public class User {
     private String id;
 
     private String login;
+    @JsonIgnore
     private String password;
     private RoleType role;
     private boolean active;
