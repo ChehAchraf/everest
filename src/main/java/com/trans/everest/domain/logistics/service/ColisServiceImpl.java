@@ -68,7 +68,16 @@ public class ColisServiceImpl implements ColisService {
 
     @Override
     public Colis updateStatus(String colisId, ColisStatus newStatus) {
-        return null;
+        Colis colis = colisRepository.findById(colisId)
+                .orElseThrow(() -> new RuntimeException("Colis not found"));
+
+        colis.setStatus(newStatus);
+
+        if(newStatus == ColisStatus.LIVRE) {
+            colis.setDateLivraison(java.time.LocalDateTime.now());
+        }
+
+        return colisRepository.save(colis);
     }
 
     @Override
