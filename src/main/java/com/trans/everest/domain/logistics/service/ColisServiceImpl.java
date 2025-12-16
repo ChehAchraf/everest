@@ -1,5 +1,7 @@
 package com.trans.everest.domain.logistics.service;
 
+import com.trans.everest.domain.iam.model.RoleType;
+import com.trans.everest.domain.iam.model.User;
 import com.trans.everest.domain.iam.repository.UserRepository;
 import com.trans.everest.domain.logistics.dto.ColisRequest;
 import com.trans.everest.domain.logistics.enums.ColisStatus;
@@ -41,7 +43,27 @@ public class ColisServiceImpl implements ColisService {
 
     @Override
     public Colis assignColisToTransporter(String colisId, String transporterId) {
-        return null;
+        Colis colis = colisRepository.findById(colisId)
+                .orElseThrow(() -> new RuntimeException("Colis not found"));
+
+        User transporter = userRepository.findById(transporterId)
+                .orElseThrow(() -> new RuntimeException("Transporter not found"));
+
+        if (transporter.getRole() != RoleType.TRANSPORTEUR) {
+            throw new RuntimeException("User is not a transporter");
+        }
+
+
+        String colisTypeStr = colis.getType().name();
+        String transporterSpecStr = transporter.getSpecialite().name();
+
+        if (!colisTypeStr.equals(transporterSpecStr) && colis.getType() != ColisType.STANDARD) {
+            throw new RuntimeException("Specialite mismatch: This parcel requires " + colisTypeStr);
+        }
+
+        colis.setLivreur(transporter);
+        colis.setStatus(ColisStatus.EN_TRANSIT);
+        return colisRepository.save(colis);
     }
 
     @Override
