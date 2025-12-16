@@ -1,6 +1,7 @@
 package com.trans.everest.domain.iam.controller;
 
 import com.trans.everest.domain.iam.dto.RegisterUserRequest;
+import com.trans.everest.domain.iam.dto.UpdateTransporteurRequest;
 import com.trans.everest.domain.iam.dto.UserResponse;
 import com.trans.everest.domain.iam.model.RoleType;
 import com.trans.everest.domain.iam.model.SpecialiteType;
@@ -76,6 +77,14 @@ public class AdminUserController {
         );
 
         return ResponseEntity.ok(userService.registerUser(newRequest));
+    }
+
+    @PutMapping("/transporteurs/{id}")
+    public ResponseEntity<UserResponse> updateTransporteur(
+            @PathVariable String id,
+            @RequestBody UpdateTransporteurRequest request
+    ) {
+        return ResponseEntity.ok(userService.updateTransporteur(id, request));
     }
 
 }
