@@ -28,8 +28,8 @@ public class Colis {
     private String adresseDestination;
     private String adresseDepart;
 
-    private ColisStatus status; // [cite: 16]
-    private ColisType type;     // STANDARD, FRAGILE, FRIGO
+    private ColisStatus status;
+    private ColisType type;
 
     private String instructionsManutention;
 

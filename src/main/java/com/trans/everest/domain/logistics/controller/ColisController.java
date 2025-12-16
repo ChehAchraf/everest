@@ -5,6 +5,7 @@ import com.trans.everest.domain.iam.service.interfaces.UserService;
 import com.trans.everest.domain.logistics.dto.ColisRequest;
 import com.trans.everest.domain.logistics.model.Colis;
 import com.trans.everest.domain.logistics.service.interfaces.ColisService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +22,19 @@ public class ColisController {
     private final UserService userService;
 
     @PostMapping("/admin/colis")
-    public ResponseEntity<Colis> createColis(@RequestBody ColisRequest request) {
+    public ResponseEntity<Colis> createColis(@Valid @RequestBody ColisRequest request) {
         return ResponseEntity.ok(colisService.createColis(request));
+    }
+
+    @PutMapping("/admin/colis/{id}")
+    public ResponseEntity<Colis> updateColis(@PathVariable String id, @Valid @RequestBody ColisRequest request) {
+        return ResponseEntity.ok(colisService.updateColis(id, request));
+    }
+
+    @DeleteMapping("/admin/colis/{id}")
+    public ResponseEntity<Void> deleteColis(@PathVariable String id) {
+        colisService.deleteColis(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/admin/colis/{id}/assign")

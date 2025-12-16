@@ -9,6 +9,10 @@ import org.springframework.data.domain.Pageable;
 public interface ColisService {
     Colis createColis(ColisRequest request);
 
+    public Colis updateColis(String id, ColisRequest request);
+
+    public void deleteColis(String id);
+
     Colis assignColisToTransporter(String colisId, String transporterId);
 
     Colis updateStatus(String colisId, ColisStatus newStatus);

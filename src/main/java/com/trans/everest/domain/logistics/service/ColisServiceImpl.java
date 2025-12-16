@@ -42,6 +42,33 @@ public class ColisServiceImpl implements ColisService {
     }
 
     @Override
+    public Colis updateColis(String id, ColisRequest request) {
+
+        Colis existingColis = colisRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Colis was not found with the id : " + id));
+
+
+        existingColis.setPoids(request.poids());
+        existingColis.setAdresseDestination(request.adresseDestination());
+        existingColis.setAdresseDepart(request.adresseDepart());
+
+
+        existingColis.setInstructionsManutention(request.instructionsManutention());
+        existingColis.setTemperatureMin(request.temperatureMin());
+        existingColis.setTemperatureMax(request.temperatureMax());
+
+        return colisRepository.save(existingColis);
+    }
+
+    @Override
+    public void deleteColis(String id) {
+        if (!colisRepository.existsById(id)) {
+            throw new RuntimeException("Impossible to delete. Colis was not found.");
+        }
+        colisRepository.deleteById(id);
+    }
+
+    @Override
     public Colis assignColisToTransporter(String colisId, String transporterId) {
         Colis colis = colisRepository.findById(colisId)
                 .orElseThrow(() -> new RuntimeException("Colis not found"));
