@@ -82,17 +82,17 @@ public class ColisServiceImpl implements ColisService {
 
     @Override
     public Page<Colis> getAllColis(Pageable pageable) {
-        return null;
+        return colisRepository.findAll(pageable);
     }
 
     @Override
     public Page<Colis> getColisByTransporter(String transporterId, Pageable pageable) {
-        return null;
+        return colisRepository.findAllByLivreurId(transporterId, pageable);
     }
 
     @Override
     public Page<Colis> searchByCity(String city, Pageable pageable) {
-        return null;
+        return colisRepository.findAllByAdresseDestinationContainingIgnoreCase(city, pageable);
     }
 
     private String generateTrackingCode() {
