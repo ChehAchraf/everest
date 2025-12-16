@@ -15,7 +15,6 @@ public record ColisRequest(
         @NotNull(message = "Le type de colis est obligatoire")
         ColisType type,
 
-        // حقول خاصة (Optional)
         String instructionsManutention,
         Double temperatureMin,
         Double temperatureMax
