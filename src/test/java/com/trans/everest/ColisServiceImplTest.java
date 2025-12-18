@@ -42,14 +42,14 @@ class ColisServiceImplTest {
 
         Colis colis = Colis.builder()
                 .id(colisId)
-                .type(ColisType.FRIGO) // كولية فريكو
+                .type(ColisType.FRIGO)
                 .status(ColisStatus.EN_ATTENTE)
                 .build();
 
         User livreur = User.builder()
                 .id(livreurId)
                 .role(RoleType.TRANSPORTEUR)
-                .specialite(SpecialiteType.FRIGO) // ليفرور فريكو
+                .specialite(SpecialiteType.FRIGO)
                 .build();
 
         when(colisRepository.findById(colisId)).thenReturn(Optional.of(colis));
