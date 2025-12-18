@@ -84,8 +84,9 @@ public class ColisServiceImpl implements ColisService {
         String colisTypeStr = colis.getType().name();
         String transporterSpecStr = transporter.getSpecialite().name();
 
-        if (!colisTypeStr.equals(transporterSpecStr) && colis.getType() != ColisType.STANDARD) {
-            throw new RuntimeException("Specialite mismatch: This parcel requires " + colisTypeStr);
+        if (!colis.getType().name().equals(transporter.getSpecialite().name())) {
+            throw new RuntimeException("Mismatch: Transporter is " + transporter.getSpecialite()
+                    + " but Parcel is " + colis.getType());
         }
 
         colis.setLivreur(transporter);
@@ -94,9 +95,13 @@ public class ColisServiceImpl implements ColisService {
     }
 
     @Override
-    public Colis updateStatus(String colisId, ColisStatus newStatus) {
+    public Colis updateStatus(String colisId,String transporterId, ColisStatus newStatus) {
         Colis colis = colisRepository.findById(colisId)
                 .orElseThrow(() -> new RuntimeException("Colis not found"));
+
+        if (colis.getLivreur() == null || !colis.getLivreur().getId().equals(transporterId)) {
+            throw new RuntimeException("Unauthorized: You are not assigned to this parcel.");
+        }
 
         colis.setStatus(newStatus);
 

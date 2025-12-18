@@ -3,6 +3,7 @@ package com.trans.everest.domain.logistics.controller;
 import com.trans.everest.domain.iam.model.User;
 import com.trans.everest.domain.iam.service.interfaces.UserService;
 import com.trans.everest.domain.logistics.dto.ColisRequest;
+import com.trans.everest.domain.logistics.enums.ColisStatus;
 import com.trans.everest.domain.logistics.model.Colis;
 import com.trans.everest.domain.logistics.service.interfaces.ColisService;
 import jakarta.validation.Valid;
@@ -40,6 +41,15 @@ public class ColisController {
     @PutMapping("/admin/colis/{id}/assign")
     public ResponseEntity<Colis> assignColis(@PathVariable String id, @RequestParam String transporterId) {
         return ResponseEntity.ok(colisService.assignColisToTransporter(id, transporterId));
+    }
+
+    @PatchMapping("/transporteur/colis/{id}/status")
+    public ResponseEntity<Colis> updateColisStatus(
+            @PathVariable String id,
+            @RequestParam ColisStatus status
+    ) {
+        User currentUser = getCurrentUser();
+        return ResponseEntity.ok(colisService.updateStatus(id, currentUser.getId(), status));
     }
 
     @GetMapping("/admin/colis")

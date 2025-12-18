@@ -15,7 +15,7 @@ public interface ColisService {
 
     Colis assignColisToTransporter(String colisId, String transporterId);
 
-    Colis updateStatus(String colisId, ColisStatus newStatus);
+    Colis updateStatus(String colisId,String transporterId, ColisStatus newStatus);
 
     Page<Colis> getAllColis(Pageable pageable);
     Page<Colis> getColisByTransporter(String transporterId, Pageable pageable);

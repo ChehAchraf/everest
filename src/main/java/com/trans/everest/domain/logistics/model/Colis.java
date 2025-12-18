@@ -1,5 +1,6 @@
 package com.trans.everest.domain.logistics.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.trans.everest.domain.iam.model.User;
 import com.trans.everest.domain.logistics.enums.ColisStatus;
 import com.trans.everest.domain.logistics.enums.ColisType;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 public class Colis {
     @Id
